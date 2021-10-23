@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.backend.examPortal
+web: java -Dserver.port=$PORT -jar target/backend.examPortal-0.0.1-SNAPSHOT.jar
