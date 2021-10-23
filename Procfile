@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/backend.examPortal-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -jar target/examPortal-0.0.1-SNAPSHOT.jar
