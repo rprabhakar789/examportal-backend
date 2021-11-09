@@ -37,7 +37,12 @@ public class QuizDaoImpl implements QuizDao {
 		return rs;
 	}
 	public void add(Quiz q) {
-		// TODO Auto-generated method stub
+		//get the curr hibernate session
+		Session cs = em.unwrap(Session.class);
+
+		//create a query
+		Query<Quiz>query =
+				cs.createQuery("from Quiz",Quiz.class);
 		
 	}
 	public Quiz getById(int id) {

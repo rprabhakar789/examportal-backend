@@ -17,7 +17,7 @@ import com.backend.examPortal.entity.UserRole;
 import com.backend.examPortal.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000/", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/user")
 public class UserController {
 

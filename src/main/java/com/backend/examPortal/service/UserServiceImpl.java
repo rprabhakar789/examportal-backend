@@ -9,8 +9,9 @@ import com.backend.examPortal.Repo.RoleRepo;
 import com.backend.examPortal.Repo.UserRepo;
 import com.backend.examPortal.entity.User;
 import com.backend.examPortal.entity.UserRole;
+import org.springframework.stereotype.Service;
 
-@Repository
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired

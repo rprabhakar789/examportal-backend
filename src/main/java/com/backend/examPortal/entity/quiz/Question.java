@@ -1,5 +1,8 @@
 package com.backend.examPortal.entity.quiz;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +22,12 @@ public class Question {
 	private String option2;
 	private String option3;
 	private String option4;
-	private String answer; 
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String answer;
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	private Quiz quiz;
 	
 	public Question() {
 		
@@ -38,8 +46,6 @@ public class Question {
 	}
 	
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	private Quiz quiz;
 
 	public int getId() {
 		return id;
@@ -106,5 +112,21 @@ public class Question {
 	}
 	
 	
-	
+	public boolean isValidQuestion()
+	{
+		System.out.println("checking if question is valid...");
+		System.out.println(questionText);
+		System.out.println(option1);
+		System.out.println(option2);
+		System.out.println(answer);
+
+		if(questionText==null||questionText.trim()=="")return false;
+
+		if(option1==null)return false;
+
+		if(option2==null)return false;
+		if(answer.trim()==null||(!answer.equals(option1) && !answer.equals(option2)))return false;
+		return true;
+
+	}
 }
