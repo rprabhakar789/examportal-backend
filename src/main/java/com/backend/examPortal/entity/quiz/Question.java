@@ -114,18 +114,17 @@ public class Question {
 	
 	public boolean isValidQuestion()
 	{
-		System.out.println("checking if question is valid...");
-		System.out.println(questionText);
-		System.out.println(option1);
-		System.out.println(option2);
-		System.out.println(answer);
-
 		if(questionText==null||questionText.trim()=="")return false;
 
 		if(option1==null)return false;
-
 		if(option2==null)return false;
-		if(answer.trim()==null||(!answer.equals(option1) && !answer.equals(option2)))return false;
+		if(option3==null)return false;
+		if(option4==null)return false;
+		if(answer.trim()==null
+				||(!answer.equals(option1)
+				&& !answer.equals(option2)
+				&& !answer.equals(option3)
+				&& !answer.equals(option4)))return false;
 		return true;
 
 	}

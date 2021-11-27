@@ -1,9 +1,11 @@
 package com.backend.examPortal.restController;
 
+import com.backend.examPortal.entity.quiz.Answer;
 import com.backend.examPortal.entity.quiz.Question;
 import com.backend.examPortal.entity.quiz.Quiz;
 import com.backend.examPortal.entity.quiz.Result;
 import com.backend.examPortal.service.QuestionService;
+import com.backend.examPortal.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,13 @@ import java.util.Set;
 public class QuestionController {
 
     QuestionService qService;
-
+    QuizService quizService;
 
     @Autowired
-    public QuestionController(QuestionService q)
+    public QuestionController(QuestionService q, QuizService quiz)
     {
         qService = q;
+        quizService = quiz;
     }
 
     @RequestMapping("/questions")
@@ -68,26 +71,26 @@ public class QuestionController {
     }
 
     @RequestMapping("/getResult")
-    public ResponseEntity<?> submitAnswers(@RequestBody List<Question> questions)throws Exception{
-        System.out.println(questions.get(0));
-        Quiz quiz = questions.get(0).getQuiz();
-
-        int quizId = quiz.getId();
-        int totalQues = questions.size();
+    public ResponseEntity<?> submitAnswers(@RequestBody List<Answer> answers)throws Exception{
+        System.out.println("submission accepted");
+        System.out.println(answers.get(0));
+        int quizId = answers.get(0).getQuizId();
+        Quiz quiz = quizService.getQuizById(quizId);
+        int totalQues = qService.getQuestionByQuizId(quizId).size();
         int correctAns = 0;
         int totalMarks = quiz.gettotal_marks();
 
-        for (Question q : questions) {
-            int id = q.getId();
+        for (Answer ans : answers) {
+            int id = ans.getQuestionId();
             Question original = qService.getQuestion(id);
-            if(original.getAnswer().equals(q.getAnswer()))
+            if(original.getAnswer().equals(ans.getAnswer()))
             {
                 correctAns = correctAns+1;
             }
         }
         double marksScored = ((double) correctAns/totalQues)*totalMarks;
 
-        Result result = new Result(quizId, totalQues, totalMarks, correctAns, totalMarks);
+        Result result = new Result(quizId, totalQues, totalMarks, correctAns,marksScored);
         return ResponseEntity.ok(result);
 
     }

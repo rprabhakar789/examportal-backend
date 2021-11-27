@@ -5,9 +5,9 @@ public class Result {
     int noOfQues;
     int totalMarks;
     int correctAnswers;
-    int marksScored;
+    double marksScored;
 
-    public Result(int quizId, int noOfQues, int totalMarks, int correctAnswers, int marksScored) {
+    public Result(int quizId, int noOfQues, int totalMarks, int correctAnswers, double marksScored) {
         this.quizId = quizId;
         this.noOfQues = noOfQues;
         this.totalMarks = totalMarks;
@@ -50,11 +50,11 @@ public class Result {
         this.correctAnswers = correctAnswers;
     }
 
-    public int getMarksScored() {
+    public double getMarksScored() {
         return marksScored;
     }
 
-    public void setMarksScored(int marksScored) {
+    public void setMarksScored(double marksScored) {
         this.marksScored = marksScored;
     }
 }
